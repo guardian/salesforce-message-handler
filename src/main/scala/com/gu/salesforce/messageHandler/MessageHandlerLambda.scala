@@ -93,7 +93,7 @@ trait MessageHandler extends Logging {
       if (parsedMessage.getOrganizationId.startsWith(Config.salesforceOrganizationId)) {
         processNotifications(parsedMessage.getNotification.toList, outputStream)
       } else {
-        logger.info("Unexpected salesforce organization id in xml message")
+        logger.info(s"Unexpected salesforce organization id ${parsedMessage.getOrganizationId} in xml message. Expected: ${Config.salesforceOrganizationId}.")
         outputForAPIGateway(outputStream, unauthorized)
       }
     }
