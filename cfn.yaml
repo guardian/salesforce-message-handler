@@ -89,48 +89,48 @@ Resources:
               Principal: apigateway.amazonaws.com
           DependsOn: SalesforceMessageHandlerLambda
 
-  MessageHandlerApi1:
+  MessageHandlerApi:
       Type: "AWS::ApiGateway::RestApi"
       Properties:
           Description: Api to handle salesforce outbound messages
           Name: !Sub salesforce-message-handler-${Stage}
 
-  MessageHandlerApiResource1:
+  MessageHandlerApiResource:
       Type: AWS::ApiGateway::Resource
       Properties:
-          RestApiId: !Ref MessageHandlerApi1
-          ParentId: !GetAtt [MessageHandlerApi1, RootResourceId]
+          RestApiId: !Ref MessageHandlerApi
+          ParentId: !GetAtt [MessageHandlerApi, RootResourceId]
           PathPart: contact
-      DependsOn: MessageHandlerApi1
+      DependsOn: MessageHandlerApi
 
-  ContactMethod1:
+  ContactMethod:
       Type: AWS::ApiGateway::Method
       Properties:
           AuthorizationType: NONE
-          RestApiId: !Ref MessageHandlerApi1
-          ResourceId: !Ref MessageHandlerApiResource1
+          RestApiId: !Ref MessageHandlerApi
+          ResourceId: !Ref MessageHandlerApiResource
           HttpMethod: POST
           Integration:
             Type: AWS_PROXY
             IntegrationHttpMethod: POST
             Uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${SalesforceMessageHandlerLambda.Arn}/invocations
       DependsOn:
-      - MessageHandlerApi1
+      - MessageHandlerApi
       - SalesforceMessageHandlerLambda
-      - MessageHandlerApiResource1
+      - MessageHandlerApiResource
 
-  MessageHandlerApiStage1:
+  MessageHandlerApiStage:
     Type: AWS::ApiGateway::Stage
     Properties:
         Description: Stage for salesforce message handler API
-        RestApiId: !Ref MessageHandlerApi1
+        RestApiId: !Ref MessageHandlerApi
         DeploymentId: !Ref MessageHandlerAPIDeployment1
         StageName: !Sub ${Stage}
-    DependsOn: ContactMethod1
+    DependsOn: ContactMethod
 
   MessageHandlerAPIDeployment1:
     Type: AWS::ApiGateway::Deployment
     Properties:
         Description: Deploys the message handler API into an environment/stage
-        RestApiId: !Ref MessageHandlerApi1
-    DependsOn: ContactMethod1
+        RestApiId: !Ref MessageHandlerApi
+    DependsOn: ContactMethod
