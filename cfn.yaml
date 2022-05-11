@@ -95,7 +95,7 @@ Resources:
           Description: Api to handle salesforce outbound messages
           Name: !Sub salesforce-message-handler-${Stage}
 
-  MessageHandlerApiResource:
+  MessageHandlerApiResource1:
       Type: AWS::ApiGateway::Resource
       Properties:
           RestApiId: !Ref MessageHandlerApi
@@ -108,7 +108,7 @@ Resources:
       Properties:
           AuthorizationType: NONE
           RestApiId: !Ref MessageHandlerApi
-          ResourceId: !Ref MessageHandlerApiResource
+          ResourceId: !Ref MessageHandlerApiResource1
           HttpMethod: POST
           Integration:
             Type: AWS_PROXY
@@ -117,7 +117,7 @@ Resources:
       DependsOn:
       - MessageHandlerApi
       - SalesforceMessageHandlerLambda
-      - MessageHandlerApiResource
+      - MessageHandlerApiResource1
 
   MessageHandlerApiStage:
     Type: AWS::ApiGateway::Stage
