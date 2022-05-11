@@ -89,7 +89,7 @@ Resources:
               Principal: apigateway.amazonaws.com
           DependsOn: SalesforceMessageHandlerLambda
 
-  MessageHandlerApi:
+  MessageHandlerApi1:
       Type: "AWS::ApiGateway::RestApi"
       Properties:
           Description: Api to handle salesforce outbound messages
@@ -98,16 +98,16 @@ Resources:
   MessageHandlerApiResource1:
       Type: AWS::ApiGateway::Resource
       Properties:
-          RestApiId: !Ref MessageHandlerApi
-          ParentId: !GetAtt [MessageHandlerApi, RootResourceId]
+          RestApiId: !Ref MessageHandlerApi1
+          ParentId: !GetAtt [MessageHandlerApi1, RootResourceId]
           PathPart: contact
-      DependsOn: MessageHandlerApi
+      DependsOn: MessageHandlerApi1
 
-  ContactMethod:
+  ContactMethod1:
       Type: AWS::ApiGateway::Method
       Properties:
           AuthorizationType: NONE
-          RestApiId: !Ref MessageHandlerApi
+          RestApiId: !Ref MessageHandlerApi1
           ResourceId: !Ref MessageHandlerApiResource1
           HttpMethod: POST
           Integration:
@@ -115,22 +115,22 @@ Resources:
             IntegrationHttpMethod: POST
             Uri: !Sub arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${SalesforceMessageHandlerLambda.Arn}/invocations
       DependsOn:
-      - MessageHandlerApi
+      - MessageHandlerApi1
       - SalesforceMessageHandlerLambda
       - MessageHandlerApiResource1
 
-  MessageHandlerApiStage:
+  MessageHandlerApiStage1:
     Type: AWS::ApiGateway::Stage
     Properties:
         Description: Stage for salesforce message handler API
-        RestApiId: !Ref MessageHandlerApi
-        DeploymentId: !Ref MessageHandlerAPIDeployment
+        RestApiId: !Ref MessageHandlerApi1
+        DeploymentId: !Ref MessageHandlerAPIDeployment1
         StageName: !Sub ${Stage}
-    DependsOn: ContactMethod
+    DependsOn: ContactMethod1
 
-  MessageHandlerAPIDeployment:
+  MessageHandlerAPIDeployment1:
     Type: AWS::ApiGateway::Deployment
     Properties:
         Description: Deploys the message handler API into an environment/stage
-        RestApiId: !Ref MessageHandlerApi
-    DependsOn: ContactMethod
+        RestApiId: !Ref MessageHandlerApi1
+    DependsOn: ContactMethod1
