@@ -24,7 +24,7 @@ libraryDependencies ++= Seq(
   "com.amazonaws" % "aws-java-sdk-s3" % "1.12.150",
   "com.typesafe" % "config" % "1.4.1",
   "org.slf4j" % "slf4j-simple" % "1.7.35",
-  "com.typesafe.play" %% "play-json" % "2.9.2",
+  "com.typesafe.play" %% "play-json" % "2.9.3",
   "org.scala-lang.modules" %% "scala-xml" % "2.0.1",
   "org.specs2" %% "specs2-core" % "4.13.2" % "test",
   "org.specs2" %% "specs2-matcher-extra" % "4.13.2" % "test",
