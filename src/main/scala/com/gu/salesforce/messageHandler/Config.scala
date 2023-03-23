@@ -16,7 +16,7 @@ object Config {
     def apply(): Env = Env(
       Option(System.getenv("App")).getOrElse("salesforce-message-handler"),
       Option(System.getenv("Stack")).getOrElse("membership"),
-      Option(System.getenv("Stage")).getOrElse("CODE"))
+      Option(System.getenv("Stage")).getOrElse("DEV"))
   }
 
   val stage = Env().stage.toUpperCase
