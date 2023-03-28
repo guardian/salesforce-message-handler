@@ -18,7 +18,6 @@ scalacOptions ++= Seq(
 
 
 libraryDependencies ++= Seq(
-  "com.amazonaws" % "aws-lambda-java-log4j" % "1.0.1",
   "com.amazonaws" % "aws-lambda-java-core" % "1.2.1",
   "com.amazonaws" % "aws-java-sdk-sqs" % "1.12.150",
   "com.amazonaws" % "aws-java-sdk-s3" % "1.12.150",
@@ -29,8 +28,7 @@ libraryDependencies ++= Seq(
   "org.specs2" %% "specs2-core" % "4.13.2" % "test",
   "org.specs2" %% "specs2-matcher-extra" % "4.13.2" % "test",
   "org.specs2" %% "specs2-mock" % "4.13.2" % "test",
-  "org.hamcrest" % "hamcrest-all" % "1.3" % "test",
-  "org.mockito" % "mockito-all" % "1.10.19" % "test"
+  "org.hamcrest" % "hamcrest-all" % "1.3" % "test"
 )
 
 /* required to bump jackson versions due to CVE-2020-36518 */ 
