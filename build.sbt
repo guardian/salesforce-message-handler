@@ -52,7 +52,8 @@ dependencyOverrides ++= jacksonDependencies
 
 enablePlugins(RiffRaffArtifact)
 
-assemblyJarName := s"${name.value}.jar"
+assembly / assemblyJarName := s"${name.value}.jar"
+assembly / assemblyOutputPath := file(s"${(assembly/assemblyJarName).value}")
 riffRaffPackageType := assembly.value
 riffRaffUploadArtifactBucket := Option("riffraff-artifact")
 riffRaffUploadManifestBucket := Option("riffraff-builds")
