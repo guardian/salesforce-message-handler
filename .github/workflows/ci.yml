@@ -34,16 +34,16 @@ jobs:
           java-version: '8'
           cache: 'sbt'
 
-      - name: riffRaffUpload
+      - name: Compile and package project
         run: sbt 'set test in assembly := {}' clean assembly
 
-#      - name: Upload to Riff-Raff
-#        uses: guardian/actions-riff-raff@v2
-#        with:
-#          app: salesforce-message-handler
-#          configPath: ./riff-raff.yaml
-#          contentDirectories: |
-#            cfn:
-#              - ./cfn.yaml
-#            salesforce-message-handler:
-#              - ./salesforce-message-handler.jar
+      - name: Upload to Riff-Raff
+        uses: guardian/actions-riff-raff@v2
+        with:
+          app: salesforce-message-handler
+          configPath: ./riff-raff.yaml
+          contentDirectories: |
+            cfn:
+              - ./cfn.yaml
+            salesforce-message-handler:
+              - ./salesforce-message-handler.jar
