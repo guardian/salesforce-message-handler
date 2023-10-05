@@ -35,7 +35,7 @@ jobs:
           cache: 'sbt'
 
       - name: riffRaffUpload
-        run: sbt clean riffRaffUpload
+        run: sbt 'set test in assembly := {}' clean assembly
 
 #      - name: Upload to Riff-Raff
 #        uses: guardian/actions-riff-raff@v2
