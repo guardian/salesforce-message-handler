@@ -13,3 +13,4 @@ project/plugins/project/
 .scala_dependencies
 .worksheet
 /.bsp/sbt.json
+salesforce-message-handler.jar

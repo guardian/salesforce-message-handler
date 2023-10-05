@@ -50,14 +50,8 @@ dependencyOverrides ++= jacksonDependencies
 
 /* EOF jackson version overrides */
 
-enablePlugins(RiffRaffArtifact)
-
-assemblyJarName := s"${name.value}.jar"
-riffRaffPackageType := assembly.value
-riffRaffUploadArtifactBucket := Option("riffraff-artifact")
-riffRaffUploadManifestBucket := Option("riffraff-builds")
-riffRaffManifestProjectName := "MemSub::Subscriptions::Salesforce Message Handler"
-riffRaffArtifactResources += (file("cfn.yaml"), "cfn/cfn.yaml")
+assembly / assemblyJarName := s"${name.value}.jar"
+assembly / assemblyOutputPath := file(s"${(assembly/assemblyJarName).value}")
 
 cxfTarget := (sourceManaged.value / "cxf" / "sfOutboundMessages" / "main")
 cxfWsdls +=
