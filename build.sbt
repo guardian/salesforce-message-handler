@@ -28,7 +28,10 @@ libraryDependencies ++= Seq(
   "org.specs2" %% "specs2-core" % "4.13.2" % "test",
   "org.specs2" %% "specs2-matcher-extra" % "4.13.2" % "test",
   "org.specs2" %% "specs2-mock" % "4.13.2" % "test",
-  "org.hamcrest" % "hamcrest-all" % "1.3" % "test"
+  "org.hamcrest" % "hamcrest-all" % "1.3" % "test",
+  "javax.xml.bind" % "jaxb-api" % "2.3.1",
+  "com.sun.xml.ws" % "jaxws-rt" % "2.3.5",
+  "org.specs2" %% "specs2-mock" % "4.20.5" % Test
 )
 
 /* required to bump jackson versions due to CVE-2020-36518 */ 

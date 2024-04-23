@@ -8,7 +8,7 @@ import play.api.libs.json.{ JsValue, Json }
 
 import java.io.{ ByteArrayInputStream, InputStream, OutputStream }
 import javax.xml.bind.JAXBContext
-import javax.xml.soap.MessageFactory
+import com.sun.xml.messaging.saaj.soap.MessageFactoryImpl
 import scala.collection.JavaConverters._
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.Duration
@@ -26,7 +26,7 @@ trait MessageHandler extends Logging {
 
   def parseMessage(requestBody: String) = {
     val is = new ByteArrayInputStream(requestBody.getBytes)
-    val messageFactory = MessageFactory.newInstance()
+    val messageFactory = new MessageFactoryImpl()
     val soapMessage = messageFactory.createMessage(null, is)
     val body = soapMessage.getSOAPBody
     val jc = JAXBContext.newInstance(classOf[Notifications])
