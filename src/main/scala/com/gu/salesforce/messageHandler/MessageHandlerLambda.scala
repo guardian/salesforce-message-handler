@@ -3,17 +3,15 @@ package com.gu.salesforce.messageHandler
 import com.amazonaws.services.lambda.runtime.Context
 import com.amazonaws.services.sqs.model.SendMessageResult
 import com.gu.salesforce.messageHandler.APIGatewayResponse._
-import com.sforce.soap._2005._09.outbound._
-import play.api.libs.json.{ JsValue, Json }
+import com.gu.salesforce.messageHandler.SOAPNotificationsParser.parseMessage
+import salesforce.soap.ContactNotification
+import play.api.libs.json.{JsValue, Json}
 
-import java.io.{ ByteArrayInputStream, InputStream, OutputStream }
-import javax.xml.bind.JAXBContext
-import javax.xml.soap.MessageFactory
-import scala.collection.JavaConverters._
+import java.io.{InputStream, OutputStream}
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.Duration
-import scala.concurrent.{ Await, Future }
-import scala.util.{ Failure, Try }
+import scala.concurrent.{Await, Future}
+import scala.util.{Failure, Try}
 
 trait RealDependencies {
   val queueClient = SqsClient
@@ -23,21 +21,6 @@ trait MessageHandler extends Logging {
   def queueClient: QueueClient
 
   val queueName = s"salesforce-outbound-messages-${Config.stage}"
-
-  def parseMessage(requestBody: String) = {
-    val is = new ByteArrayInputStream(requestBody.getBytes)
-    val messageFactory = MessageFactory.newInstance()
-    val soapMessage = messageFactory.createMessage(null, is)
-    val body = soapMessage.getSOAPBody
-    val jc = JAXBContext.newInstance(classOf[Notifications])
-    val unmarshaller = jc.createUnmarshaller()
-    val je = unmarshaller.unmarshal(body.extractContentAsDocument(), classOf[Notifications])
-    je.getValue()
-  }
-
-  case class QueueMessage(contactId: String)
-
-  implicit val messageFormat = Json.format[QueueMessage]
 
   def credentialsAreValid(inputEvent: JsValue): Boolean = {
 
@@ -56,13 +39,13 @@ trait MessageHandler extends Logging {
   }
 
   def sendToQueue(notification: ContactNotification): Future[Try[SendMessageResult]] = {
-    val queueMessage = QueueMessage(notification.getSObject.getId)
+    val queueMessage = QueueMessage(notification.sObject.Id.get)
     val queueMessageString = Json.prettyPrint(Json.toJson(queueMessage))
     queueClient.send(queueName, queueMessageString)
   }
 
-  def processNotifications(notifications: List[ContactNotification], outputStream: OutputStream) = {
-    val contactListStr = notifications.map(_.getSObject.getId).mkString(", ")
+  def processNotifications(notifications: Seq[ContactNotification], outputStream: OutputStream) = {
+    val contactListStr = notifications.flatMap(_.sObject.Id).mkString(", ")
     logger.info(s"contacts found in salesforce xml: [$contactListStr]")
     val FutureResponses = notifications.map(sendToQueue)
     val future = Future.sequence(FutureResponses).map { responses =>
@@ -91,8 +74,8 @@ trait MessageHandler extends Logging {
       logger.info("Authenticated request successfully...")
       val body = (inputEvent \ "body").as[String]
       val parsedMessage = parseMessage(body)
-      if (parsedMessage.getOrganizationId.startsWith(Config.salesforceOrganizationId)) {
-        processNotifications(asScalaBuffer(parsedMessage.getNotification).toList, outputStream)
+      if (parsedMessage.OrganizationId.startsWith(Config.salesforceOrganizationId)) {
+        processNotifications(parsedMessage.Notification, outputStream)
       } else {
         logger.info("Unexpected salesforce organization id in xml message")
         outputForAPIGateway(outputStream, unauthorized)
