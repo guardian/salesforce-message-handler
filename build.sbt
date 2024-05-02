@@ -31,7 +31,7 @@ libraryDependencies ++= Seq(
   "org.scala-lang.modules" %% "scala-parser-combinators" % "2.4.0",
   "com.typesafe" % "config" % "1.4.3",
   "org.slf4j" % "slf4j-simple" % "1.7.35",
-  "com.typesafe.play" %% "play-json" % "2.9.2",
+  "com.typesafe.play" %% "play-json" % "2.9.4",
   "org.scala-lang.modules" %% "scala-xml" % "2.0.1",
   "org.specs2" %% "specs2-core" % "4.13.2" % Test,
   "org.specs2" %% "specs2-matcher-extra" % "4.13.2" % Test,
