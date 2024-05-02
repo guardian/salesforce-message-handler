@@ -7,7 +7,7 @@ description:= "handle outbound messages from salesforce to update zuora and iden
 
 version := "1.0"
 
-scalaVersion := "2.12.19"
+scalaVersion := "2.13.14"
 
 scalacOptions ++= Seq(
   "-deprecation",
