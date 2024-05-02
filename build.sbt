@@ -21,7 +21,7 @@ enablePlugins(ScalaxbPlugin)
 Compile / scalaxb / scalaxbPackageName := "salesforce.soap"
 Compile / scalaxb / scalaxbGenerateDispatchClient := false // we don't need to use the 'dispatch' library
 
-val AwsVersion = "1.12.705"
+val AwsVersion = "1.12.713"
 
 libraryDependencies ++= Seq(
   "com.amazonaws" % "aws-lambda-java-core" % "1.2.1",
