@@ -29,7 +29,7 @@ libraryDependencies ++= Seq(
   "com.amazonaws" % "aws-java-sdk-s3" % AwsVersion,
   "org.scala-lang.modules" %% "scala-xml" % "2.2.0",
   "org.scala-lang.modules" %% "scala-parser-combinators" % "2.4.0",
-  "com.typesafe" % "config" % "1.4.1",
+  "com.typesafe" % "config" % "1.4.3",
   "org.slf4j" % "slf4j-simple" % "1.7.35",
   "com.typesafe.play" %% "play-json" % "2.9.2",
   "org.scala-lang.modules" %% "scala-xml" % "2.0.1",
