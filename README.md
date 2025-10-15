@@ -1,6 +1,6 @@
-# Deprecated notice
+# :warning: Deprecated notice :warning:
 
-**This application has now been replaced by [salesforce-event-bus](https://github.com/guardian/support-service-lambdas/tree/main/handlers/salesforce-event-bus) which is now relaying messages between Salesforce and membership-workflow. **
+__This application has now been replaced by [salesforce-event-bus](https://github.com/guardian/support-service-lambdas/tree/main/handlers/salesforce-event-bus) which is now relaying messages between Salesforce and membership-workflow.__
 
 # salesforce-message-handler
 
