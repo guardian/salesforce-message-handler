@@ -40,8 +40,8 @@ libraryDependencies ++= Seq(
 )
 
 /* required to bump jackson versions due to CVE-2020-36518 */ 
-val jacksonVersion         = "2.13.2"
-val jacksonDatabindVersion = "2.13.2.2"
+val jacksonVersion         = "2.15.0"
+val jacksonDatabindVersion = "2.15.0"
 
 val jacksonDependencies = Seq(
   "com.fasterxml.jackson.core"     % "jackson-core" %  jacksonVersion,

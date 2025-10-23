@@ -30,9 +30,13 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
-          distribution: 'corretto'
-          java-version: '21'
-          cache: 'sbt'
+          distribution: "corretto"
+          java-version: "21"
+          cache: "sbt"
+
+      - name: Install sbt
+        id: sbt
+        uses: sbt/setup-sbt@8a071aa780c993c7a204c785d04d3e8eb64ef272 # v1.1.0
 
       - name: Compile and package project
         run: sbt 'set test in assembly := {}' clean assembly
