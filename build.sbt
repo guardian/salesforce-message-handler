@@ -40,7 +40,7 @@ libraryDependencies ++= Seq(
 )
 
 /* required to bump jackson versions due to CVE-2020-36518 */ 
-val jacksonVersion         = "2.15.0"
+val jacksonVersion         = "2.15.4"
 val jacksonDatabindVersion = "2.15.0"
 
 val jacksonDependencies = Seq(
