@@ -24,7 +24,7 @@ Compile / scalaxb / scalaxbGenerateDispatchClient := false // we don't need to u
 val AwsVersion = "1.12.792"
 
 libraryDependencies ++= Seq(
-  "com.amazonaws" % "aws-lambda-java-core" % "1.2.3",
+  "com.amazonaws" % "aws-lambda-java-core" % "1.4.0",
   "com.amazonaws" % "aws-java-sdk-sqs" % AwsVersion,
   "com.amazonaws" % "aws-java-sdk-s3" % AwsVersion,
   "org.scala-lang.modules" %% "scala-xml" % "2.3.0",
