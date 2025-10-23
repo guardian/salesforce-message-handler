@@ -7,7 +7,7 @@ description:= "handle outbound messages from salesforce to update zuora and iden
 
 version := "1.0"
 
-scalaVersion := "2.12.19"
+scalaVersion := "2.13.14"
 
 scalacOptions ++= Seq(
   "-deprecation",
@@ -27,15 +27,15 @@ libraryDependencies ++= Seq(
   "com.amazonaws" % "aws-lambda-java-core" % "1.2.3",
   "com.amazonaws" % "aws-java-sdk-sqs" % AwsVersion,
   "com.amazonaws" % "aws-java-sdk-s3" % AwsVersion,
-  "org.scala-lang.modules" %% "scala-xml" % "2.2.0",
+  "org.scala-lang.modules" %% "scala-xml" % "2.3.0",
   "org.scala-lang.modules" %% "scala-parser-combinators" % "2.4.0",
-  "com.typesafe" % "config" % "1.4.1",
-  "org.slf4j" % "slf4j-simple" % "1.7.35",
-  "com.typesafe.play" %% "play-json" % "2.9.2",
+  "com.typesafe" % "config" % "1.4.3",
+  "org.slf4j" % "slf4j-simple" % "1.7.36",
+  "com.typesafe.play" %% "play-json" % "2.9.4",
   "org.scala-lang.modules" %% "scala-xml" % "2.0.1",
-  "org.specs2" %% "specs2-core" % "4.13.2" % Test,
-  "org.specs2" %% "specs2-matcher-extra" % "4.13.2" % Test,
-  "org.specs2" %% "specs2-mock" % "4.13.2" % Test,
+  "org.specs2" %% "specs2-core" % "4.13.3" % Test,
+  "org.specs2" %% "specs2-matcher-extra" % "4.13.3" % Test,
+  "org.specs2" %% "specs2-mock" % "4.13.3" % Test,
   "org.hamcrest" % "hamcrest-all" % "1.3" % Test
 )
 
